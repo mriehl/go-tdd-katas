@@ -5,40 +5,34 @@ import (
 )
 
 func TestNoFizzBuzz(t *testing.T) {
-	assertEqualStr(FizzBuzz(1), "", t)
-	assertEqualStr(FizzBuzz(2), "", t)
-	assertEqualStr(FizzBuzz(4), "", t)
-	assertEqualStr(FizzBuzz(7), "", t)
-	assertEqualStr(FizzBuzz(8), "", t)
-	assertEqualStr(FizzBuzz(11), "", t)
+	assertFizzbuzzIs(1, "", t)
+	assertFizzbuzzIs(2, "", t)
+	assertFizzbuzzIs(4, "", t)
+	assertFizzbuzzIs(7, "", t)
+	assertFizzbuzzIs(8, "", t)
+	assertFizzbuzzIs(11, "", t)
 }
 
 func TestFizzNoBuzz(t *testing.T) {
-	assertEqualStr(FizzBuzz(3), "fizz", t)
-	assertEqualStr(FizzBuzz(6), "fizz", t)
-	assertEqualStr(FizzBuzz(9), "fizz", t)
-	assertEqualStr(FizzBuzz(12), "fizz", t)
-	assertEqualStr(FizzBuzz(18), "fizz", t)
+	assertFizzbuzzIs(3, "fizz", t)
+	assertFizzbuzzIs(6, "fizz", t)
+	assertFizzbuzzIs(9, "fizz", t)
+	assertFizzbuzzIs(12, "fizz", t)
+	assertFizzbuzzIs(18, "fizz", t)
 }
 
 func TestBuzzNoFizz(t *testing.T) {
-	assertEqualStr(FizzBuzz(5), "buzz", t)
-	assertEqualStr(FizzBuzz(20), "buzz", t)
-	assertEqualStr(FizzBuzz(25), "buzz", t)
+	assertFizzbuzzIs(5, "buzz", t)
+	assertFizzbuzzIs(20, "buzz", t)
+	assertFizzbuzzIs(25, "buzz", t)
 }
 
 func TestFizzBuzz(t *testing.T) {
-	assertEqualStr(FizzBuzz(15), "fizzbuzz", t)
+	assertFizzbuzzIs(15, "fizzbuzz", t)
 }
 
-func assertEqualBool(actual, expected bool, t *testing.T) {
-	if actual != expected {
-		t.Errorf("Got %v but expected %v", actual, expected)
-	}
-}
-
-func assertEqualStr(actual, expected string, t *testing.T) {
-	if actual != expected {
-		t.Errorf("Got %v but expected %v", actual, expected)
+func assertFizzbuzzIs(number uint32, expected string, t *testing.T) {
+	if actual := FizzBuzz(number); actual != expected {
+		t.Errorf("Got %q but expected %q", actual, expected)
 	}
 }
