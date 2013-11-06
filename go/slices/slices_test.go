@@ -42,7 +42,7 @@ func TestShouldAddSeveralItemsAndIncreaseCapacity(t *testing.T) {
 }
 
 func assertHasGrown(s []int, originalLength int, t *testing.T) {
-	if hasGrown := cap(s) >= len(s) && len(s) > 1; !hasGrown {
+	if hasGrown := cap(s) >= len(s) && len(s) > originalLength; !hasGrown {
 		t.Errorf("Slice has not grown as expected (len %d and cap %d but "+
 			"should hold 2 elements)", len(s), cap(s))
 	}
