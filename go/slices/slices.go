@@ -1,20 +1,17 @@
 package slices
 
-func expandSlice(slice []int, data ...int) []int {
-	currentLength := len(slice)
-	neededLength := currentLength + len(data)
+func expandSlice(slice []int, additions ...int) []int {
+	neededCapacity := len(slice) + len(additions)
 
-	if neededLength > cap(slice) {
-		newSlice := make([]int, len(slice), (neededLength+1)*2)
-		copy(newSlice, slice)
-		slice = newSlice
+	if mustGrow := (neededCapacity > cap(slice)); mustGrow {
+		grownSlice := make([]int, len(slice), (neededCapacity+1)*2)
+		copy(grownSlice, slice)
+		slice = grownSlice
 	}
 
-	view := slice[len(slice):cap(slice)]
-
-	for i := range data {
-		view[i] = data[i]
+	sliceTail := slice[len(slice):cap(slice)]
+	for i := range additions {
+		sliceTail[i] = additions[i]
 	}
-
-	return slice[:neededLength]
+	return slice[:neededCapacity]
 }
