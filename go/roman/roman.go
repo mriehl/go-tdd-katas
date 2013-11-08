@@ -11,7 +11,7 @@ func DivMod(number uint16, divisor uint16) (quotient, remainder uint16) {
 	return
 }
 
-func asRoman(decimal uint16) (roman string) {
+func AsRoman(decimal uint16) (roman string) {
 
 	var mapping = []RomanAtom{
 		RomanAtom{DecimalValue: 1000, Rune: "M"},
@@ -33,6 +33,7 @@ func asRoman(decimal uint16) (roman string) {
 		amount_of_runes, remaining_decimal := DivMod(decimal, romanAtom.DecimalValue)
 		decimal = remaining_decimal
 		// TODO overload with Rune * amount_of_runes would be cleaner
+		// is it possible?
 		for count := uint16(1); count <= amount_of_runes; count++ {
 			roman += romanAtom.Rune
 		}
