@@ -1,27 +1,28 @@
 package slices
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestShouldNopWhenNothingIsAdded(t *testing.T) {
 	s := []int{1, 2, 3}
 	s = expandSlice(s)
-	assertEqual(s, []int{1, 2, 3}, t)
+	assert.Equal(t, s, []int{1, 2, 3})
 }
 
 func TestShouldAddOneItemWhileInCapacity(t *testing.T) {
 	s := make([]int, 1, 2)
 	s[0] = 8
 	s = expandSlice(s, 4)
-	assertEqual(s, []int{8, 4}, t)
+	assert.Equal(t, s, []int{8, 4})
 }
 
 func TestShouldAddSeveralItemWhileInCapacity(t *testing.T) {
 	s := make([]int, 1, 10)
 	s[0] = 8
 	s = expandSlice(s, 4, 5, 6, 7, 8)
-	assertEqual(s, []int{8, 4, 5, 6, 7, 8}, t)
+	assert.Equal(t, s, []int{8, 4, 5, 6, 7, 8})
 }
 
 func TestShouldIncreaseCapacityWhenNecessary(t *testing.T) {
@@ -30,7 +31,7 @@ func TestShouldIncreaseCapacityWhenNecessary(t *testing.T) {
 	s = expandSlice(s, 4)
 
 	assertHasGrown(s, 1, t)
-	assertEqual(s, []int{8, 4}, t)
+	assert.Equal(t, s, []int{8, 4})
 }
 
 func TestShouldAddSeveralItemsAndIncreaseCapacity(t *testing.T) {
@@ -38,25 +39,12 @@ func TestShouldAddSeveralItemsAndIncreaseCapacity(t *testing.T) {
 	s = expandSlice(s, 4, 5, 6)
 
 	assertHasGrown(s, 2, t)
-	assertEqual(s, []int{1, 2, 4, 5, 6}, t)
+	assert.Equal(t, s, []int{1, 2, 4, 5, 6})
 }
 
 func assertHasGrown(s []int, originalLength int, t *testing.T) {
 	if hasGrown := cap(s) >= originalLength && len(s) > originalLength; !hasGrown {
 		t.Errorf("Slice has not grown as expected (len %d and cap %d but "+
 			"should hold more than %d elements)", len(s), cap(s), originalLength)
-	}
-}
-
-func assertEqual(s1, s2 []int, t *testing.T) {
-	if len(s1) != len(s2) {
-		t.Errorf("Not same length: %v and %v", s1, s2)
-	}
-
-	for v := range s1 {
-		if s1[v] != s2[v] {
-			t.Errorf("Differing item at position %d : %v versus %v\n%v\t%v",
-				v, s1[v], s2[v], s1, s2)
-		}
 	}
 }
