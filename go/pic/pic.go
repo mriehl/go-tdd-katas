@@ -18,7 +18,8 @@ func Pic(dx, dy int) (bluescale [][]uint8) {
 		bluescale[dxSliceIndex] = make([]uint8, dx)
 
 		for pixelIndex := range bluescale[dxSliceIndex] {
-			bluescale[dxSliceIndex][pixelIndex] = bluescaleValue(dxSliceIndex, pixelIndex)
+			pixelValue := bluescaleValue(dxSliceIndex, pixelIndex)
+			bluescale[dxSliceIndex][pixelIndex] = pixelValue
 		}
 
 	}
