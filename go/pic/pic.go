@@ -4,7 +4,7 @@ import (
 	"code.google.com/p/go-tour/pic"
 )
 
-func bluescaleValue(x, y int) (value uint8) {
+func BluescaleValue(x, y int) (value uint8) {
 	_x := uint8(x)
 	_y := uint8(y)
 	value = (_x + _y) / uint8(2)
@@ -18,7 +18,7 @@ func Pic(dx, dy int) (bluescale [][]uint8) {
 		bluescale[dxSliceIndex] = make([]uint8, dx)
 
 		for pixelIndex := range bluescale[dxSliceIndex] {
-			pixelValue := bluescaleValue(dxSliceIndex, pixelIndex)
+			pixelValue := BluescaleValue(dxSliceIndex, pixelIndex)
 			bluescale[dxSliceIndex][pixelIndex] = pixelValue
 		}
 
