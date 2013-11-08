@@ -1,6 +1,7 @@
 package fizz
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -32,7 +33,5 @@ func TestFizzBuzz(t *testing.T) {
 }
 
 func assertFizzbuzzIs(number uint32, expected string, t *testing.T) {
-	if actual := FizzBuzz(number); actual != expected {
-		t.Errorf("Got %q but expected %q", actual, expected)
-	}
+	assert.Equal(t, FizzBuzz(number), expected)
 }
