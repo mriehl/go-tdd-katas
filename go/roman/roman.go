@@ -5,6 +5,12 @@ type RomanAtom struct {
 	Rune         string
 }
 
+func DivMod(number uint16, divisor uint16) (quotient, remainder uint16) {
+	quotient = number / divisor
+	remainder = number % divisor
+	return
+}
+
 func asRoman(decimal uint16) (roman string) {
 
 	var mapping = []RomanAtom{
@@ -24,10 +30,13 @@ func asRoman(decimal uint16) (roman string) {
 	}
 
 	for _, romanAtom := range mapping {
-		for decimal >= romanAtom.DecimalValue {
-			decimal -= romanAtom.DecimalValue
+		amount_of_runes, remaining_decimal := DivMod(decimal, romanAtom.DecimalValue)
+		decimal = remaining_decimal
+		// TODO overload with Rune * amount_of_runes would be cleaner
+		for count := uint16(1); count <= amount_of_runes; count++ {
 			roman += romanAtom.Rune
 		}
+
 	}
 
 	return
