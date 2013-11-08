@@ -10,8 +10,8 @@ func expandSlice(slice []int, additions ...int) []int {
 	}
 
 	sliceTail := slice[len(slice):cap(slice)]
-	for i := range additions {
-		sliceTail[i] = additions[i]
+	for i, v := range additions {
+		sliceTail[i] = v
 	}
 	return slice[:neededCapacity]
 }
