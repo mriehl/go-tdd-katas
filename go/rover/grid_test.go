@@ -22,3 +22,15 @@ func TestShouldSnapRoverToGrid(t *testing.T) {
 	grid.Snap(rover)
 	assert.Equal(t, grid.At(rover.Coords), ROVER)
 }
+
+func TestShouldOverflowWidth(t *testing.T) {
+	grid := NewGrid(4, 4)
+	newPosition := grid.OverflowPosition(Coordinates{3, 3}, 1, 0)
+	assert.Equal(t, newPosition, Coordinates{0, 3})
+}
+
+func TestShouldOverflowHeight(t *testing.T) {
+	grid := NewGrid(4, 4)
+	newPosition := grid.OverflowPosition(Coordinates{3, 3}, 1, 0)
+	assert.Equal(t, newPosition, Coordinates{0, 3})
+}
