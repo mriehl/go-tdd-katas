@@ -60,7 +60,7 @@ func (rover *Rover) TurnRight() {
 }
 
 func (rover *Rover) TurnLeft() {
-	// turn left = turn right 3 times
+	// turn left == turn right 3 times
 	// screw efficiency, let's be DRY
 	for i := 0; i < 3; i++ {
 		rover.TurnRight()
