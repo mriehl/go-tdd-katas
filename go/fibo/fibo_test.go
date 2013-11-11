@@ -22,3 +22,12 @@ func TestShouldReturnFibonacciSequence(t *testing.T) {
 	assert.Equal(t, nextFibo(), 144)
 	assert.Equal(t, nextFibo(), 233)
 }
+
+func TestShouldNotRelyOnGlobalState(t *testing.T) {
+	fibo1 := Fibonacci()
+	fibo2 := Fibonacci()
+	assert.Equal(t, fibo1(), 0)
+	assert.Equal(t, fibo2(), 0)
+	assert.Equal(t, fibo1(), 1)
+	assert.Equal(t, fibo2(), 1)
+}
