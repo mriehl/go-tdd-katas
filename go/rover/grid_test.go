@@ -31,6 +31,6 @@ func TestShouldOverflowWidth(t *testing.T) {
 
 func TestShouldOverflowHeight(t *testing.T) {
 	grid := NewGrid(4, 4)
-	newPosition := grid.OverflowPosition(Coordinates{3, 3}, 1, 0)
-	assert.Equal(t, newPosition, Coordinates{0, 3})
+	newPosition := grid.OverflowPosition(Coordinates{3, 3}, 0, 1)
+	assert.Equal(t, newPosition, Coordinates{3, 0})
 }
