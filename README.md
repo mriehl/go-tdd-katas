@@ -2,7 +2,7 @@
 
 Includes following problems:
 
- * [Mars Rover]([Fizzbuzz](https://github.com/mriehl/katas/tree/master/go/rover))
+ * [Mars Rover](https://github.com/mriehl/katas/tree/master/go/rover)
  * [Fizzbuzz](https://github.com/mriehl/katas/tree/master/go/fizz)
  * [Fibonacci closure](https://github.com/mriehl/katas/tree/master/go/fibo)
  * [Picture generation](https://github.com/mriehl/katas/tree/master/go/pic)
