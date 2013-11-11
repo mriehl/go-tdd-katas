@@ -21,7 +21,10 @@ type Rover struct {
 	Facing int
 }
 
-// rover.New()
+/*
+ * Just called New because external users will
+ * use rover.New()
+ */
 func New(coords Coordinates, facing int) *Rover {
 	rover := new(Rover)
 	rover.Coords = coords
@@ -53,6 +56,7 @@ func (rover *Rover) TurnLeft() {
 }
 
 func (rover *Rover) TurnBack() {
+	// using TurnRight because TurnLeft is slower
 	rover.TurnRight()
 	rover.TurnRight()
 }
