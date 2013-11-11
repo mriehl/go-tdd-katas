@@ -11,21 +11,6 @@ const (
 	West  = iota
 )
 
-func Opposite(direction int) (newDirection int) {
-	switch direction {
-	case North:
-		return South
-	case South:
-		return North
-	case East:
-		return West
-	case West:
-		return East
-	default:
-		panic(fmt.Sprintf("WTF is this direction: %d", direction))
-	}
-}
-
 type Coordinates struct {
 	X int
 	Y int
@@ -67,6 +52,11 @@ func (rover *Rover) TurnLeft() {
 	}
 }
 
+func (rover *Rover) TurnBack() {
+	rover.TurnRight()
+	rover.TurnRight()
+}
+
 func (rover *Rover) Advance() {
 	switch direction := rover.Facing; direction {
 	case North:
@@ -81,8 +71,7 @@ func (rover *Rover) Advance() {
 }
 
 func (rover *Rover) Retreat() {
-	facing := rover.Facing
-	rover.Facing = Opposite(rover.Facing)
+	rover.TurnBack()
 	rover.Advance()
-	rover.Facing = facing
+	rover.TurnBack()
 }
