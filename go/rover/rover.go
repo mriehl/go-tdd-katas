@@ -66,16 +66,19 @@ func (rover *Rover) TurnBack() {
 
 func (rover *Rover) Advance() {
 	rover.Grid.Insert(rover.Coords, NOTHING)
+	var dX, dY int
 	switch direction := rover.Facing; direction {
 	case North:
-		rover.Coords.Y += 1
+		dY += 1
 	case East:
-		rover.Coords.X += 1
+		dX += 1
 	case West:
-		rover.Coords.X -= 1
+		dX -= 1
 	case South:
-		rover.Coords.Y -= 1
+		dY -= 1
 	}
+	newCoords := rover.Grid.OverflowPosition(rover.Coords, dX, dY)
+	rover.Coords = newCoords
 	rover.Grid.Snap(rover)
 }
 

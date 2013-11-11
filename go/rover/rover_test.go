@@ -94,3 +94,15 @@ func TestShouldStaySnappedToGrid(t *testing.T) {
 	assert.Equal(t, rover.Grid.At(Coordinates{0, 0}), NOTHING)
 	assert.Equal(t, rover.Grid.At(rover.Coords), ROVER)
 }
+
+func TestShouldAdvanceWithOverflow(t *testing.T) {
+	rover := New(Coordinates{99, 99}, North)
+	rover.Advance()
+	assert.Equal(t, rover.Coords, Coordinates{99, 0})
+}
+
+func TestShouldRetreatWithOverflow(t *testing.T) {
+	rover := New(Coordinates{99, 99}, East)
+	rover.Advance()
+	assert.Equal(t, rover.Coords, Coordinates{0, 99})
+}
