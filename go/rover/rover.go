@@ -19,6 +19,7 @@ type Coordinates struct {
 type Rover struct {
 	Coords Coordinates
 	Facing int
+	Grid   *Grid
 }
 
 /*
