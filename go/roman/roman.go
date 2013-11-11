@@ -1,5 +1,9 @@
 package roman
 
+import (
+	"strings"
+)
+
 type RomanAtom struct {
 	DecimalValue uint16
 	Rune         string
@@ -32,12 +36,7 @@ func AsRoman(decimal uint16) (roman string) {
 	for _, romanAtom := range mapping {
 		amount_of_runes, remaining_decimal := DivMod(decimal, romanAtom.DecimalValue)
 		decimal = remaining_decimal
-		// TODO overload with Rune * amount_of_runes would be cleaner
-		// is it possible?
-		for count := uint16(1); count <= amount_of_runes; count++ {
-			roman += romanAtom.Rune
-		}
-
+		roman += strings.Repeat(romanAtom.Rune, int(amount_of_runes))
 	}
 
 	return
