@@ -36,6 +36,14 @@ type Rover struct {
 	Facing int
 }
 
+// rover.New()
+func New(coords Coordinates, facing int) *Rover {
+	rover := new(Rover)
+	rover.Coords = coords
+	rover.Facing = facing
+	return rover
+}
+
 func (rover *Rover) TurnRight() {
 	switch direction := rover.Facing; direction {
 	case North:
