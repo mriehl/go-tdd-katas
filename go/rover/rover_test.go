@@ -62,3 +62,27 @@ func TestShouldRetreatSouth(t *testing.T) {
 	rover.Retreat()
 	assert.Equal(t, rover.Coords, Coordinates{0, 1})
 }
+
+func TestShouldTurnRight(t *testing.T) {
+	var rover = &Rover{Facing: North}
+	rover.TurnRight()
+	assert.Equal(t, rover.Facing, East)
+	rover.TurnRight()
+	assert.Equal(t, rover.Facing, South)
+	rover.TurnRight()
+	assert.Equal(t, rover.Facing, West)
+	rover.TurnRight()
+	assert.Equal(t, rover.Facing, North)
+}
+
+func TestShouldTurnLeft(t *testing.T) {
+	var rover = &Rover{Facing: North}
+	rover.TurnLeft()
+	assert.Equal(t, rover.Facing, West)
+	rover.TurnLeft()
+	assert.Equal(t, rover.Facing, South)
+	rover.TurnLeft()
+	assert.Equal(t, rover.Facing, East)
+	rover.TurnLeft()
+	assert.Equal(t, rover.Facing, North)
+}

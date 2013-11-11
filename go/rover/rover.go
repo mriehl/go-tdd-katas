@@ -6,8 +6,8 @@ import (
 
 const (
 	North = iota
-	South = iota
 	East  = iota
+	South = iota
 	West  = iota
 )
 
@@ -34,6 +34,29 @@ type Coordinates struct {
 type Rover struct {
 	Coords Coordinates
 	Facing int
+}
+
+func (rover *Rover) TurnRight() {
+	switch direction := rover.Facing; direction {
+	case North:
+		rover.Facing = East
+	case East:
+		rover.Facing = South
+	case South:
+		rover.Facing = West
+	case West:
+		rover.Facing = North
+	default:
+		panic(fmt.Sprintf("WTF is this direction: %d", direction))
+	}
+}
+
+func (rover *Rover) TurnLeft() {
+	// turn left = turn right 3 times
+	// screw efficiency, let's be DRY
+	for i := 0; i < 3; i++ {
+		rover.TurnRight()
+	}
 }
 
 func (rover *Rover) Advance() {
