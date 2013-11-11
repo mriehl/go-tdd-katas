@@ -30,6 +30,8 @@ func New(coords Coordinates, facing int) *Rover {
 	rover := new(Rover)
 	rover.Coords = coords
 	rover.Facing = facing
+	rover.Grid = NewGrid(100, 100)
+	rover.Grid.Snap(rover)
 	return rover
 }
 
@@ -63,6 +65,7 @@ func (rover *Rover) TurnBack() {
 }
 
 func (rover *Rover) Advance() {
+	rover.Grid.Insert(rover.Coords, NOTHING)
 	switch direction := rover.Facing; direction {
 	case North:
 		rover.Coords.Y += 1
@@ -73,6 +76,7 @@ func (rover *Rover) Advance() {
 	case South:
 		rover.Coords.Y -= 1
 	}
+	rover.Grid.Snap(rover)
 }
 
 func (rover *Rover) Retreat() {

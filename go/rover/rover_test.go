@@ -29,27 +29,27 @@ func TestShouldAdvanceEast(t *testing.T) {
 }
 
 func TestShouldAdvanceWest(t *testing.T) {
-	rover := New(Coordinates{0, 0}, West)
+	rover := New(Coordinates{1, 0}, West)
 	rover.Advance()
-	assert.Equal(t, rover.Coords, Coordinates{-1, 0})
+	assert.Equal(t, rover.Coords, Coordinates{0, 0})
 }
 
 func TestShouldAdvanceSouth(t *testing.T) {
-	rover := New(Coordinates{0, 0}, South)
+	rover := New(Coordinates{0, 1}, South)
 	rover.Advance()
-	assert.Equal(t, rover.Coords, Coordinates{0, -1})
+	assert.Equal(t, rover.Coords, Coordinates{0, 0})
 }
 
 func TestShouldRetreatNorth(t *testing.T) {
-	rover := New(Coordinates{0, 0}, North)
+	rover := New(Coordinates{0, 1}, North)
 	rover.Retreat()
-	assert.Equal(t, rover.Coords, Coordinates{0, -1})
+	assert.Equal(t, rover.Coords, Coordinates{0, 0})
 }
 
 func TestShouldRetreatEast(t *testing.T) {
-	rover := New(Coordinates{0, 0}, East)
+	rover := New(Coordinates{1, 0}, East)
 	rover.Retreat()
-	assert.Equal(t, rover.Coords, Coordinates{-1, 0})
+	assert.Equal(t, rover.Coords, Coordinates{0, 0})
 }
 
 func TestShouldRetreatWest(t *testing.T) {
@@ -86,4 +86,11 @@ func TestShouldTurnLeft(t *testing.T) {
 	assert.Equal(t, rover.Facing, East)
 	rover.TurnLeft()
 	assert.Equal(t, rover.Facing, North)
+}
+
+func TestShouldStaySnappedToGrid(t *testing.T) {
+	rover := New(Coordinates{0, 0}, North)
+	rover.Advance()
+	assert.Equal(t, rover.Grid.At(Coordinates{0, 0}), NOTHING)
+	assert.Equal(t, rover.Grid.At(rover.Coords), ROVER)
 }
