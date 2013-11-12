@@ -106,3 +106,12 @@ func TestShouldRetreatWithOverflow(t *testing.T) {
 	rover.Advance()
 	assert.Equal(t, rover.Coords, Coordinates{0, 99})
 }
+
+func TestShouldReportObstacle(t *testing.T) {
+	rover := New(Coordinates{0, 0}, North)
+	rover.Grid.Insert(Coordinates{1, 1}, OBSTACLE)
+	rover.Advance()
+	rover.TurnRight()
+	rover.Advance()
+	assert.Equal(t, rover.Coords, Coordinates{0, 1})
+}

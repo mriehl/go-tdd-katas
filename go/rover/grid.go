@@ -37,7 +37,7 @@ func (grid *Grid) At(coords Coordinates) int {
 }
 
 func (grid *Grid) OverflowPosition(startingPoint Coordinates, dX, dY int) (Coordinates, bool) {
-	newCoords := Coordinates{startingPoint.X + dX, startingPoint.Y + dY}
+	newCoords := startingPoint.Move(dX, dY)
 	if newCoords.X >= grid.Width {
 		newCoords.X -= grid.Width
 	}
