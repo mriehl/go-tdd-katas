@@ -77,7 +77,7 @@ func (rover *Rover) Advance() {
 	case South:
 		dY -= 1
 	}
-	newCoords := rover.Grid.OverflowPosition(rover.Coords, dX, dY)
+	newCoords, _ := rover.Grid.OverflowPosition(rover.Coords, dX, dY)
 	rover.Coords = newCoords
 	rover.Grid.Snap(rover)
 }

@@ -1,8 +1,9 @@
 package rover
 
 const (
-	NOTHING = 0
-	ROVER   = 42
+	NOTHING  = iota
+	OBSTACLE = iota
+	ROVER    = iota
 )
 
 type Grid struct {
@@ -35,7 +36,7 @@ func (grid *Grid) At(coords Coordinates) int {
 	return grid.Field[coords.X][coords.Y]
 }
 
-func (grid *Grid) OverflowPosition(startingPoint Coordinates, dX, dY int) Coordinates {
+func (grid *Grid) OverflowPosition(startingPoint Coordinates, dX, dY int) (Coordinates, bool) {
 	newCoords := Coordinates{startingPoint.X + dX, startingPoint.Y + dY}
 	if newCoords.X >= grid.Width {
 		newCoords.X -= grid.Width
@@ -43,5 +44,10 @@ func (grid *Grid) OverflowPosition(startingPoint Coordinates, dX, dY int) Coordi
 	if newCoords.Y >= grid.Height {
 		newCoords.Y -= grid.Height
 	}
-	return newCoords
+
+	if grid.At(newCoords) != NOTHING {
+		return startingPoint, false
+	}
+
+	return newCoords, true
 }
