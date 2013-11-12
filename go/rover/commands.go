@@ -1,9 +1,12 @@
 package rover
 
 import (
-	"code.google.com/p/log4go"
 	"fmt"
+	"log"
+	"os"
 )
+
+var rcLogger = log.New(os.Stderr, "[RoverRemoteControl] ", log.Flags())
 
 func ValidateCommands(commands []string) bool {
 	for _, command := range commands {
@@ -13,7 +16,7 @@ func ValidateCommands(commands []string) bool {
 		case "L":
 		case "R":
 		default:
-			log4go.Warn(fmt.Sprintf("Unknown command: %v", command))
+			rcLogger.Println(fmt.Sprintf("Unknown command: %q, ignoring it.", command))
 			return false
 		}
 	}

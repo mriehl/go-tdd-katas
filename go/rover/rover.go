@@ -1,8 +1,9 @@
 package rover
 
 import (
-	"code.google.com/p/log4go"
 	"fmt"
+	"log"
+	"os"
 )
 
 const (
@@ -11,6 +12,8 @@ const (
 	South = iota
 	West  = iota
 )
+
+var logger = log.New(os.Stderr, "[Rover] ", log.Flags())
 
 type Coordinates struct {
 	X int
@@ -85,7 +88,7 @@ func (rover *Rover) Advance() {
 	}
 	newCoords, ok := rover.Grid.OverflowPosition(rover.Coords, dX, dY)
 	if !ok {
-		log4go.Warn(fmt.Sprintf("Rover at %v cannot move to %v as "+
+		logger.Println(fmt.Sprintf("Rover at %v cannot move to %v as "+
 			"requested because there is an obstacle in the way.",
 			rover.Coords, rover.Coords.Move(dX, dY)))
 	}
