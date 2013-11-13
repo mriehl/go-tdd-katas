@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/mriehl/katas/go/rover"
+	"github.com/mriehl/go-tdd-katas/go/rover"
 	"log"
 	"os"
 )
