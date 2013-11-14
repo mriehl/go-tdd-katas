@@ -6,12 +6,12 @@ import (
 )
 
 func TestNoFizzBuzz(t *testing.T) {
-	assertFizzbuzzIs(1, "", t)
-	assertFizzbuzzIs(2, "", t)
-	assertFizzbuzzIs(4, "", t)
-	assertFizzbuzzIs(7, "", t)
-	assertFizzbuzzIs(8, "", t)
-	assertFizzbuzzIs(11, "", t)
+	assertFizzbuzzIs(1, "1", t)
+	assertFizzbuzzIs(2, "2", t)
+	assertFizzbuzzIs(4, "4", t)
+	assertFizzbuzzIs(7, "7", t)
+	assertFizzbuzzIs(8, "8", t)
+	assertFizzbuzzIs(11, "11", t)
 }
 
 func TestFizzNoBuzz(t *testing.T) {
@@ -32,6 +32,6 @@ func TestFizzBuzz(t *testing.T) {
 	assertFizzbuzzIs(15, "fizzbuzz", t)
 }
 
-func assertFizzbuzzIs(number uint32, expected string, t *testing.T) {
+func assertFizzbuzzIs(number int, expected string, t *testing.T) {
 	assert.Equal(t, FizzBuzz(number), expected)
 }
