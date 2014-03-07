@@ -43,6 +43,16 @@ func TestShouldReturnTrueWhenNoCollisionImminent(t *testing.T) {
 	assert.Equal(t, newPosition, Coordinates{1, 0})
 }
 
+func TestShouldNotMoveWhenColliding(t *testing.T) {
+	grid := NewGrid(4, 4)
+	rover := New(Coordinates{0, 0}, North)
+	grid.Snap(rover)
+	rover.Grid.Insert(Coordinates{0, 1}, OBSTACLE)
+
+	rover.Advance()
+	assert.Equal(t, rover.Coords, Coordinates{0, 0})
+}
+
 func TestShouldReturnFalseWhenCollisionWithObstacleImminent(t *testing.T) {
 	grid := NewGrid(4, 4)
 	grid.Insert(Coordinates{1, 0}, OBSTACLE)
